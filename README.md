@@ -12,27 +12,47 @@ The potential of quantum computing lies in its ability to handle tasks exponenti
 
 However, quantum computing is still in its early stages. Current machines are limited (referred to as Noisy Intermediate-Scale Quantum or NISQ computers), meaning they are not yet fully capable of showing dramatic improvements over classical systems for most tasks. Yet, exploring how quantum computers handle language can help us pave the way for future breakthroughs when more advanced quantum machines become available.
 
-**<h2>Our Approach (Add to this, this is only what the previous paper did)</h2>**
-Our project aims to take the first steps into the new frontier of QNLP by running NLP tasks on quantum hardware. Specifically, we focus on sentence classification tasks. We generate representations of sentences, turning them into data structures that quantum computers can process more naturally. Our approach is grounded in a model called DisCoCat (Distributional Compositional Categorical model of meaning), which maps how sentences are structured to quantum circuits, the foundation of quantum computation.
+**<h2>Our Approach</h2>**
+Our project explores QNLP through sentence classification tasks. Specifically, we map sentences into quantum data structures that quantum computers can process more naturally. We use several models for comparison:
 
-We compare how different models perform, including:
+<li>Bag-of-words: Ignores sentence structure, treating words as an unordered collection.</li>
+<li>Word-sequence model: Considers word order without deeper syntactic structure.</li>
+<li>Syntax-sensitive model (DisCoCat): Incorporates grammatical structure, producing linguistically sound representations.</li>
 
-<li>Bag-of-words: Where sentence structure is ignored, and words are treated as an unordered collection.</li>
-<li>Word-sequence model: Which considers the order of words, but not deeper syntactic structures.</li>
-<li>Syntax-sensitive model (DisCoCat): Which takes into account grammatical structure, producing more linguistically sound results.</li>
-<h3>Datasets and Tasks</h3>
-For our experiments, we use two small datasets:
+<h3>Quantum Circuit Configuration</h3>
 
 <ol>
-  <li>A dataset of 130 sentences related to food and IT, with a goal of classifying sentences into one of the two categories (binary classification task). <i>file beginning with mc</i></li>
-  <li>A dataset of 105 noun phrases extracted from a linguistic dataset. Here, the task is to predict whether a phrase contains a subject-based or object-based relative clause. <i>file beginning with by rp</i></li>
+  <li>Quantum Ansätze: Configured with one qubit per sentence and noun types, one IQP layer, and three parameters for single-qubit words.</li>
+  <li>Optimization Parameters: Configured for one run with three optimization iterations.</li>
+  <li>Backend Compatibility: Supports both IonQ and IBMQ backends for experimentation with various quantum hardware.</li>
 </ol>
 
-These tasks, though simple by traditional NLP standards, present significant challenges for current quantum computers due to their limited computational power.
+<h3>Data Handling</h3>
+<ol>
+  <li>Datasets</li>
+    <li>A 130-sentence dataset categorizing sentences related to food or IT for binary classification.</li>
+    <li>A 105-phrase dataset from linguistics, predicting subject- or object-based clauses.</li>
+</ol>
+
+Data is loaded from files (mc_train_data.txt, mc_dev_data.txt, and mc_test_data.txt) and parsed into vocabulary dictionaries and sentence-label mappings for training, development, and testing.
 **<h2>Key Takeaways from Our Work (TBD)</h2>**
 TBD
-**<h2>Installation and Setup (TBD)</h2>**
-TBD
+**<h2>Getting Started</h2>**
+<h3>Prerequisites</h3>
+Ensure you have the following packages installed:
+<ol>
+  <li>discopy==0.3.5</li>
+  <li>qiskit==0.25.4</li>
+  <li>pytket</li>
+  <li>pytket-qiskit</li>
+</ol>
+
+**<h2>Running the Project</h2>**
+<ol>
+  <li>Data Preparation: Load datasets by placing them in the specified directory, as referenced in the code.</li>
+  <li>Quantum Backend: Configure your preferred backend (e.g., IonQ or IBMQ) in the code by setting the appropriate provider and backend.</li>
+  <li>Execution: Run the main script or notebook to perform sentence classification and evaluate the model’s performance.</li>
+</ol>
 
 **<h2>References</h2>**
 <ol>
