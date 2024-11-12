@@ -46,7 +46,8 @@ Ensure you have the following packages installed:
   <li>pytket</li>
   <li>pytket-qiskit</li>
 </ol>
-
+These packages can be installed using:
+pip install -r requirements.txt
 **<h2>Running the Project</h2>**
 <ol>
   <li>Data Preparation: Load datasets by placing them in the specified directory, as referenced in the code.</li>
