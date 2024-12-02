@@ -1,61 +1,70 @@
 **<h1>Quantum Natural Language Processing (QNLP): Solving Complex Language Problems with Quantum Computing</h1>**
-**<h2>Overview</h2>**
-Welcome to our Quantum Natural Language Processing (QNLP) project. In this repository, we are tackling one of the cutting-edge frontiers in technology: leveraging quantum computing to solve natural language processing (NLP) problems. This README provides a detailed yet simplified explanation of the problem we're addressing, how we are approaching it, and why this is exciting for both the NLP and quantum computing communities.
-
-**<h2>The Problem</h2>**
-Natural language processing (NLP) is about teaching computers to understand and interpret human language. However, as language is extremely nuanced and complex, many NLP models require substantial computational resources to process text efficiently. Classical (non-quantum) computers are limited in how fast and effectively they can handle these operations.
-
-This is where quantum computing comes in. Unlike classical computers, which process data in binary (1s and 0s), quantum computers use qubits, which allow for much more complex operations. The hope is that by using quantum computing, we can speed up tasks and even solve problems that are currently too difficult for classical computers. In our case, we are looking at how quantum computing can enhance NLP tasks like sentence classification and meaning extraction.
-
-**<h2>Why Is This Important?</h2>**
-The potential of quantum computing lies in its ability to handle tasks exponentially faster than classical computers. In fields like cryptography, chemistry, and now NLP, quantum computers could provide the computational power necessary to make huge leaps forward. In particular, understanding human language better and faster has implications for everything from AI assistants like Siri or Alexa, to medical research, legal automation, and much more.
-
-However, quantum computing is still in its early stages. Current machines are limited (referred to as Noisy Intermediate-Scale Quantum or NISQ computers), meaning they are not yet fully capable of showing dramatic improvements over classical systems for most tasks. Yet, exploring how quantum computers handle language can help us pave the way for future breakthroughs when more advanced quantum machines become available.
-
-**<h2>Our Approach</h2>**
-Our project explores QNLP through sentence classification tasks. Specifically, we map sentences into quantum data structures that quantum computers can process more naturally. We use several models for comparison:
-
-<li>Bag-of-words: Ignores sentence structure, treating words as an unordered collection.</li>
-<li>Word-sequence model: Considers word order without deeper syntactic structure.</li>
-<li>Syntax-sensitive model (DisCoCat): Incorporates grammatical structure, producing linguistically sound representations.</li>
-
-<h3>Quantum Circuit Configuration</h3>
-
+**<h2>Introduction</h2>**
 <ol>
-  <li>Quantum Ansätze: Configured with one qubit per sentence and noun types, one IQP layer, and three parameters for single-qubit words.</li>
-  <li>Optimization Parameters: Configured for one run with three optimization iterations.</li>
-  <li>Backend Compatibility: Supports both IonQ and IBMQ backends for experimentation with various quantum hardware.</li>
+  <li><b>Motivation:</b> This project explores the application of quantum natural language processing (QNLP) to the task of sentence classification. Traditional natural language processing (NLP) often faces challenges in handling the complexities of language, particularly with ambiguous grammatical structures and long-range dependencies. QNLP offers a potential advantage by leveraging the principles of quantum mechanics, such as superposition and entanglement, to represent and process linguistic information in new ways.</li>
+  <li><b>Objectives:</b> The primary objective of this project is to build and evaluate a QML model that can classify sentences into predefined categories. Specifically, we focus on a binary classification task, where sentences need to be classified as either belonging to class 1 or class 0. We aim to investigate the feasibility of using quantum circuits to encode and process pregroup grammar representations of sentences, and to use these representations for classification.</li>
+  <li><b>Quantum Advantage:</b> Quantum machine learning is explored for this task due to its potential advantages in:
+    <ol>
+      <li><b>Encoding:</b> Quantum states can represent high-dimensional feature spaces efficiently, potentially better capturing the complex relationships in language.</li>
+      <li><b>Parallelism:</b> Quantum algorithms can explore multiple possibilities simultaneously, potentially leading to faster training and inference.</li>
+      <li><b>Expressability:</b> Quantum circuits have the potential to represent more complex functions than classical neural networks, enabling the model to learn intricate linguistic patterns.</li>
+    </ol>
+  </li>
 </ol>
 
-<h3>Data Handling</h3>
+**<h2>Methods</h2>**
 <ol>
-  <li>Datasets</li>
-    <li>A 130-sentence dataset categorizing sentences related to food or IT for binary classification.</li>
-    <li>A 105-phrase dataset from linguistics, predicting subject- or object-based clauses.</li>
+  <li><b>Framework:</b> This project utilizes DisCoPy, a Python library for diagrammatic reasoning, alongside Qiskit, a framework for quantum computing. Pytket is employed for quantum circuit optimization and backend interaction.</li>
+  <li><b>Model Architecture:</b> Here is a high-level overview of the model:
+    <ol>
+      <li><b>Pregroup Grammar:</b> Input sentences are parsed into diagrams representing their grammatical structure using a pregroup grammar.</li>
+      <li><b>Diagram Transformation:</b> The diagrams are transformed to prepare for the quantum encoding by "bending nouns around" to simplify the circuit structure.</li>
+      <li><b>Quantum Encoding:</b> DisCoPy's CircuitFunctor is used to map the transformed diagrams to quantum circuits. Each word in the sentence is encoded using parameterized quantum circuits, primarily based on IQP ansatz with learnable parameters.</li>
+      <li><b>Measurement and Classification:</b> Measurement of the final quantum state provides a probability distribution, used for binary classification.</li>
+    </ol>
+  </li>
+  <li><b>Quantum Circuit:</b> The core of the model is a quantum circuit built from DisCoPy's pregroup grammar diagrams. Each word is represented by a parametrized quantum gate or circuit. The specific structure depends on the sentence's grammatical structure. The circuits are then measured to obtain a probability distribution used for sentence classification.</li>
 </ol>
 
-Data is loaded from files (mc_train_data.txt, mc_dev_data.txt, and mc_test_data.txt) and parsed into vocabulary dictionaries and sentence-label mappings for training, development, and testing.
-**<h2>Key Takeaways from Our Work (TBD)</h2>**
-TBD
-**<h2>Getting Started</h2>**
-<h3>Prerequisites</h3>
-Ensure you have the following packages installed:
+**<h2>Dataset and Preprocessing</h2>**
 <ol>
-  <li>discopy==0.3.5</li>
-  <li>qiskit==0.25.4</li>
-  <li>pytket</li>
-  <li>pytket-qiskit</li>
-</ol>
-These packages can be installed using:
-pip install -r requirements.txt
-**<h2>Running the Project</h2>**
-<ol>
-  <li>Data Preparation: Load datasets by placing them in the specified directory, as referenced in the code.</li>
-  <li>Quantum Backend: Configure your preferred backend (e.g., IonQ or IBMQ) in the code by setting the appropriate provider and backend.</li>
-  <li>Execution: Run the main script or notebook to perform sentence classification and evaluate the model’s performance.</li>
+  <li><b>Data Description:</b> The project utilizes an English, 130-sentence dataset categorizing sentences related to food or IT for binary classification. The data is split into training, development, and test sets. The dataset comprises sentences with specific grammatical structures, including 'N_TV_N', 'N_TV_ADJ_N', 'ADJ_N_TV_N', and 'ADJ_N_TV_ADJ_N'.
+  </li>
+  <li>The preprocessing steps include:
+    <ol>
+      <li><b>Tokenization:</b> Sentences are split into individual words.</li>
+      <li><b>Part-of-Speech (POS) Tagging:</b> Words are tagged with their grammatical roles (noun, verb, adjective).</li>
+      <li><b>Pregroup Grammar Conversion:</b> Sentences are represented as pregroup grammar diagrams.</li>
+      <li><b>Diagram Transformation:</b> Pregroup grammar diagrams are transformed ("bending nouns around") for better quantum circuit construction.</li>
+    </ol>
+  </li>
 </ol>
 
-**<h2>References</h2>**
+**<h2>Results</h2>**
 <ol>
-  <li>https://github.com/CQCL/qnlp_lorenz_etal_2021_resources/tree/main</li>
+  <li><b>Simulation:</b> The experiments were conducted using the AerBackend, a local quantum simulator provided by Qiskit. This choice allowed for rapid experimentation and model development before potential deployment on actual quantum hardware. While the use of a simulator facilitates faster evaluation, it's important to note that the performance on actual QPUs might vary due to noise and other quantum effects.</li>
+  <li><b>Key Findings:</b>
+    <ol>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ol>
+  </li>
+  <li><b>Performance Metrics:</b> </li>
+</ol>
+
+**<h2>Conclusion</h2>**
+<ol>
+  <li><b>ummary</b>: This project demonstrated the feasibility of using QNLP for sentence classification. The QML model, based on pregroup grammar and quantum circuits, achieved a [report the accuracy achieved on our test setwhen we have it]. The experiments conducted on a quantum simulator indicate the model's potential for learning linguistic structures.</li>
+  <li><b>Impact</b>: This work contributes to the evolving field of QNLP by providing an approach for encoding and processing sentence structures. It adds to the body of evidence exploring the potential of quantum computing for natural language understanding.</li>
+  <li><b>Future Work</b>: Several areas for future research and improvement exist:
+    <ol>
+      <li><b>Hardware Implementation:</b> Evaluate the model's performance on actual quantum computers to assess the impact of noise and potential quantum advantages.</li>
+      <li><b>Model Scaling:</b> Experiment with more complex sentences and larger datasets to assess the scalability of the QNLP model.</li>
+      <li><b>Novel Architectures:</b> Explore alternative quantum circuit designs and ansatz for encoding and processing linguistic information.</li>
+      <li><b>Error Analysis:</b> Conduct a detailed analysis of the model's errors to gain insights into its limitations and opportunities for improvement.</li>
+      <li><b>Hybrid Models:</b> Investigate hybrid approaches combining classical and quantum models for more robust and practical QNLP applications.</li>
+    </ol>
+  </li>
 </ol>
