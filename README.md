@@ -71,7 +71,16 @@
 
 **<h2>References</h2>**
 <ol>
-  <li></li>
-  <li></li>
-  <li></li>
+  <li> View of QNLP in Practice: Running Compositional Models of Meaning on a Quantum Computer. (2024). 
+Jair.org. https://jair.org/index.php/jair/article/view/14329/26923</li>
+  <li>Khatri, N., & Hall, L. (n.d.). Experimental Comparison of Ansätze for Quantum Natural Language Processing. 
+https://www.cs.ox.ac.uk/people/aleks.kissinger/theses/khatri-thesis.pdf</li>
+  <li>SPSA (v0.39) | IBM Quantum Documentation. (2017). IBM Quantum Documentation. 
+https://docs.quantum.ibm.com/api/qiskit/0.39/qiskit.algorithms.optimizers.</li>
+  <li>SPSA Spall, J. C. (2000). Adaptive stochastic approximation by the simultaneous perturbation method. Proceedings 
+of the 37th IEEE Conference on Decision and Control (Cat. No.98CH36171), 4, 3872–3879.  
+https://doi.org/10.1109/cdc.1998.761833 
+  <li>PennyLane. (n.d.). Qml.AdamOptimizer. qml.AdamOptimizer - PennyLane 0.39.0 documentation. 
+https://docs.pennylane.ai/en/stable/code/api/pennylane.AdamOptimizer.html</li>
+</li>
 </ol>
